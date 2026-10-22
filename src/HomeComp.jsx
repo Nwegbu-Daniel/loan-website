@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css';
@@ -11,6 +11,7 @@ function HomeComp() {
   const [side, setSide] = useState(true)
   
   const [openStack, setOpenStack] = useState(null)
+  const swiperRef = useRef(null)
 
 
   return (
@@ -25,7 +26,7 @@ function HomeComp() {
 
             </div>
             <div className='lg:h-[60px] md:h-[60px] bg-blue-300 flex justify-center items-center gap-3'>
-                <div className='lg:h-[50px] md:h-[50px] w-[60%] bg-green-500 ml-20'>
+                <div className='lg:h-[50px] md:h-[50px] w-[60%] bg-green-500 ml-30 '>
                   <ul className='flex justify-between items-center h-[50px] w-full gap-1'>
                     <ol className='h-[30px] w-[20%] bg-mauve-600 flex justify-center items-center text-amber-50'>HOME</ol>
                     <ol className='h-[30px] w-[20%] bg-green-900 flex justify-center items-center text-amber-50'>ABOUT</ol>
@@ -35,7 +36,7 @@ function HomeComp() {
                     <ol className='h-[30px] w-[20%] bg-red-600 flex justify-center items-center text-amber-50'>BLOG</ol>
                   </ul>
                 </div>
-                <div className='lg:h-[50px] md:h-[50px] w-[30%] bg-yellow-500 ml-6 flex'>
+                <div className='lg:h-[50px] md:h-[50px] w-[25%] bg-yellow-500 ml-6 flex'>
                   <ul className='flex items-center h-[50px] w-full gap-3 '>
                     <ol className='h-[50px] w-[50px] rounded-full bg-amber-800 flex justify-center items-center text-amber-50 text-[10px]'>MENU 1</ol>
                     <ol className='h-[50px] w-[50px] rounded-full bg-amber-300 flex justify-center items-center text-amber-50 text-[10px]'>MENU 1</ol>
@@ -101,12 +102,13 @@ function HomeComp() {
         <div className='h-[200px] w-full bg-blue-500 flex'>
           <div className='h-[50px] w-[100%] md:w-[60%] lg:w-[60%]  mt-5'><div className='text-cyan-400 ml-2'>FEATURED SERVICES</div>  <div className='text-4xl w-[50%] ml-2'>mind blowing loan terms</div></div>
           <div className='h-[0px] md:h-[50px] lg:h-[50px]  md:w-[40%] lg:w-[40%] text-xl flex gap-2  justify-center items-center mt-5'>
-            <button className='hidden md:block lg:block md:h-[40px] lg:h-[40px]  md:w-[100px] lg:w-[100px] rounded-full bg-red-300 text-white'>prev</button>
-            <button className='hidden md:block lg:block md:h-[40px] lg:h-[40px]  md:w-[100px] lg:w-[100px] bg-green-500 rounded-full text-white'>next</button>
+            <button onClick={() => swiperRef.current?.slidePrev()} className='hidden md:block lg:block md:h-[40px] lg:h-[40px]  md:w-[100px] lg:w-[100px] rounded-full bg-red-300 text-white'>prev</button>
+            <button onClick={() => swiperRef.current?.slideNext()} className='hidden md:block lg:block md:h-[40px] lg:h-[40px]  md:w-[100px] lg:w-[100px] bg-green-500 rounded-full text-white'>next</button>
           </div>
         </div>
         <div className='h-[400px] w-full bg-red-400'>
           <Swiper
+        onSwiper={(swiper) => { swiperRef.current = swiper }}
         slidesPerView={1}
         spaceBetween={25}
         centeredSlides={false}
@@ -248,7 +250,7 @@ function HomeComp() {
       </div>
       <div className="h-[350px] md:h-[450px] lg:h-[450px]  w-full md:w-[50%] lg:w-[50%] bg-amber-300">
 
-        <div className=' w-[96%] md:w-[90%] lg:w-[46%] h-[600px] bg-purple-300 p-4 mt-10 absolute md:block lg:block z-0 rounded-tl-2xl rounded-tr-2xl rounded-br-2xl rounded-bl-2xl ml-[2%] md:ml-[2%] lg:ml-[2%]'>
+        <div className=' w-[96%] md:w-[90%] lg:w-[46%] h-[550px] md:h-[550px] lg:h-[550px] bg-purple-300 p-4 mt-10 absolute md:block lg:block z-0 rounded-tl-2xl rounded-tr-2xl rounded-br-2xl rounded-bl-2xl ml-[2%] md:ml-[2%] lg:ml-[2%]'>
     <div className='w-full bg-blue-500'>
            <button
             onClick={() => setOpenStack(openStack === 1 ? null : 1)}
@@ -288,7 +290,7 @@ function HomeComp() {
       <span>{openStack === 3 ? '-' : '+'}</span>
     </button>
     {openStack === 3 && (
-      <div className='w-full bg-amber-200 p-4'>
+      <div className='w-full bg-amber-200 p-4 '>
          Understand the costs before you borrow. We explain applicable interest, fees, repayment schedules, and loan conditions so you can make an informed decision.
       </div>
     )}
@@ -311,7 +313,61 @@ function HomeComp() {
 </div>
       </div>
     </div>
-    <div className='h-[600px] w-full bg-blue-900'>hey</div>
+    <div className='h-[2800px] md:h-[1000px] lg:h-[1000px] w-full bg-blue-900'>
+      <div className='h-[200px] md:h-[150px] lg:h-[150px] bg-emerald-200 '></div>
+      <div className='h-[200px] w-full bg-emerald-400 flex flex-col gap-2 p-1'>
+        <span className='w-full h-[50px] bg-amber-300 text-2xl flex justify-center items-center'>OUR TEAM</span>
+        <span className='w-ful h-[50px] md:h-[50px] lg:h-[50px]  text-4xl flex justify-center items-center'>Leading the way in</span>
+        <span className='w-full md:w-[30%] lg:w-[30%] h-[50px] md:ml-[35%] text-4xl  flex justify-center items-center mt-[-10px]'> business transformation</span>
+      </div>
+
+      <div className='h-[1500px] md:h-[500px] lg:h-[500px] w-full bg-gray-400 grid md:flex lg:flex md:justify-center md:items-center lg:justify-center  lg:items-center'>
+        <div className="group relative h-[350px] md:h-[400px] lg:h-[400px] w-full md:w-[20%] lg:w-[20%] bg-red-400 flex justify-center">
+          <div className="h-[320px] md:h-[380px] lg:h-[380px] w-[90%] md:w-[95%] lg:w-[95%] bg-indigo-300 flex justify-center items-center">image here</div>
+          <div className="h-[250px] w-[80px] md:w-[60px] lg:w-[60px] bg-amber-200 absolute ml-[63%] md:ml-53 lg:ml-43 mt-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+            <ul className='h-[200px] grid w-full gap-2 p-2'>
+              <li className='h-[50px] w-full  flex justify-center items-center bg-cyan-400'>F</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-red-600'>I</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-amber-800'>X</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-green-300'>L</li>
+            </ul>
+          </div>
+        </div>
+        <div className="group relative h-[350px] md:h-[400px] lg:h-[400px] w-full md:w-[20%] lg:w-[20%] bg-cyan-200 md:mt-[5%] lg:mt-[5%] flex justify-center">
+          <div className="h-[320px] md:h-[380px] lg:h-[380px] w-[90%] md:w-[95%] lg:w-95% bg-indigo-300 flex justify-center items-center">image here</div>
+          <div className="h-[250px] w-[80px] md:w-[60px] lg:w-[60px] bg-amber-200 absolute ml-[63%] md:ml-43 lg:ml-43 mt-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+            <ul className='h-[200px] grid w-full gap-2 p-2'>
+              <li className='h-[50px] w-full flex justify-center items-center bg-cyan-400 '>F</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-red-600'>I</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-amber-800'>X</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-green-300'>L</li>
+            </ul>
+          </div>
+        </div>
+        <div className="group relative h-[350px] md:h-[400px] lg:h-[400px] w-full md:w-[20%] lg:w-[20%] bg-purple-400 flex justify-center">
+          <div className="h-[320px] md:h-[380px] lg:h-[380px] w-[90%] md:w-[95%] lg:w-[95%] bg-indigo-300 flex justify-center items-center">image here</div>
+          <div className="h-[250px] w-[80px] md:w-[60px] lg:w-[60px] bg-amber-200 absolute ml-[63%] md:ml-43 lg:ml-43 mt-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+            <ul className='h-[200px] grid w-full gap-2 p-2'>
+              <li className='h-[50px] w-full flex justify-center items-center bg-cyan-400 '>F</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-red-600'>I</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-amber-800'>X</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-green-300'>L</li>
+            </ul>
+          </div>
+        </div>
+        <div className="group relative h-[350px] md:h-[400px] lg:h-[400px] w-full md:w-[20%] lg:w-[20%] bg-green-600 md:mt-[5%] lg:mt-[5%] flex justify-center">
+          <div className="h-[320px] md:h-[380px] lg:h-[380px] w-[90%] md:w-[95%] lg:w-[95%] bg-indigo-300 flex justify-center items-center">image here</div>
+          <div className="h-[250px] w-[80px] md:w-[60px] lg:w-[60px] bg-amber-200 absolute ml-[63%] md:ml-43 lg:ml-43 mt-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+            <ul className='h-[200px] grid w-full gap-2 p-2'>
+              <li className='h-[50px] w-full flex justify-center items-center bg-cyan-400 '>F</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-red-600'>I</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-amber-800'>X</li>
+              <li className='h-[50px] w-full flex justify-center items-center bg-green-300'>L</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   )
 }
